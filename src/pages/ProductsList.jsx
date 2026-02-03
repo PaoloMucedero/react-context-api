@@ -1,0 +1,69 @@
+import axios from "axios"
+import { Link } from "react-router-dom"
+import { useState, useEffect } from "react"
+
+
+
+const endpoint = "https://fakestoreapi.com/products"
+
+
+function ProductsList() {
+  // variabile stato prodotti
+  const [products, setProducts] = useState([]);
+
+
+  // funzione che chiama endpoint API
+  function fetchProducts() {
+    axios.get(endpoint)
+      .then((res) => setProducts(res.data))
+      .catch(err => console.error("errore richiesta"))
+  }
+
+
+  useEffect(() => {
+    fetchProducts()
+  }, []);
+
+  return (
+    <>
+
+      <div className="container mt-4">
+        <div className="row g-4">
+          {products.map(product => (
+            <div
+              key={product.id}
+              className="col-12 col-sm-6 col-md-4 col-lg-3"
+            >
+              <Link
+                to={`/products/${product.id}`}
+                className="text-decoration-none text-dark"
+              >
+                <div className="card h-100 shadow-sm">
+                  <img
+                    src={product.image}
+                    className="card-img-top p-3"
+                    style={{ height: "200px", objectFit: "contain" }}
+                    alt={product.title}
+                  />
+
+                  <div className="card-body d-flex flex-column">
+                    <h6 className="card-title">{product.title}</h6>
+                    <p className="text-muted">{product.category}</p>
+
+                    <div className="mt-auto">
+                      <strong>{product.price} €</strong>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </>
+  )
+}
+
+export default ProductsList
+

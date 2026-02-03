@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mainNav {
+    background-color: green;
+    margin-bottom: 10px;
+    min-height: 50px;
+
+}
+
+.mainNav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.mainNav li {
+    display: inline-block;
+    margin-right: 10px;
+
+}
+
+.mainNav a {
+    color: black;
+    text-decoration: none;
+    
+}
+/* Qui sto sfruttando lo stato active che mi garantisce NavLink di Router */
+.mainNav a.active {
+    background-color: white;
+}
+
+.card-img-top {
+    width: 200px;   
+}
+
+.row-flex {
+    display: flex;
+    flex-wrap: wrap;
+   
+}
+
+.card.col-sm-6 {
+    padding: 10px;
+    display: flex;
+    
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem;
+}
+
+.hero-content {
+  max-width: 50%;
+}
+
+.hero-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: orange;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.hero-image img {
+  max-width: 400px;
+}
