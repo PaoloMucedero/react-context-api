@@ -12,7 +12,7 @@ function ProductDetail() {
     axios
       .get(`https://fakestoreapi.com/products/${id}`)
       .then(res => setProduct(res.data))
-      .catch(err => console.error("Errore"));
+      .catch(() => console.error("Errore"));
   }, [id]);
 
   if (!product) return <p>Caricamento...</p>;

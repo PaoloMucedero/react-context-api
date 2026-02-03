@@ -1,35 +1,22 @@
-import axios from "axios"
 import { Link } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useBudget } from "../contexts/BudgetContext.jsx"
+import { useProducts } from "../contexts/ProductsContext.jsx"
 
-
-
-const endpoint = "https://fakestoreapi.com/products"
 
 
 function ProductsList() {
-  // variabile stato prodotti
-  const [products, setProducts] = useState([]);
-
-
-  // funzione che chiama endpoint API
-  function fetchProducts() {
-    axios.get(endpoint)
-      .then((res) => setProducts(res.data))
-      .catch(err => console.error("errore richiesta"))
-  }
-
-
-  useEffect(() => {
-    fetchProducts()
-  }, []);
+  const { budgetMode } = useBudget();
+  const { products, loading } = useProducts();
 
   return (
     <>
 
       <div className="container mt-4">
+        {loading && <p>Caricamento prodotti...</p>}
         <div className="row g-4">
-          {products.map(product => (
+          {products
+            .filter((product) => (budgetMode ? product.price <= 30 : true))
+            .map(product => (
             <div
               key={product.id}
               className="col-12 col-sm-6 col-md-4 col-lg-3"
@@ -66,4 +53,3 @@ function ProductsList() {
 }
 
 export default ProductsList
-
